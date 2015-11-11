@@ -1,6 +1,9 @@
 Each folder provides code and an example for each of the four applications
 of the infinite factorial dynamical model (iFDM) introduced in 
-[Valera et. al, 2015].
+[Valera et. al, 2015]. This code has been developed by all the authors in 
+the paper. 
+
+Please, cite it as detailes below.
 
 [Valera et. al, 2015] I. Valera, F. J. R. Ruiz, L. Svensson and F. Perez-Cruz, 
 "Infinite Factorial Dynamical Model", Neural Information Processing Systems 
