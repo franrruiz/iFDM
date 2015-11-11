@@ -7,11 +7,11 @@ param.Nd = 3;                         % Number of targets
 param.D = 25;                         % Number of sensors
 param.T  = 300;                       % Length of the sequence
 param.d0 = 1;                         % Reference distance
-param.Ts  = 0.04;                     % Sampling time
+param.Ts  = 0.5;                      % Sampling time
 param.pathL= 2;                       % Path loss exponent
 param.L = 1;
 param.flag0 = 1;                      % Consider symbol 0 as part of the constellation (if false, transmitters are always active)
-param.Niter = 1000;                   % Number of iterations of the sampler
+param.Niter = 10000;                  % Number of iterations of the sampler
 param.saveCycle = 200;
 param.storeIters = 2000;
 param.constellation=1;
@@ -28,10 +28,10 @@ pos = 0:round(data.W/(sqrt(param.D)-1)):data.W;
 [a b] = meshgrid(pos);
 data.sensors = [a(:) b(:)];
 
-data.state=zeros(param.D,4,param.T);
+data.state=zeros(param.Nd,4,param.T);
 for nt=1:param.Nd
-    Tini = 1;%randi([1 round(T/2)],1,1);
-    Tend = param.T;%min(Tini+round(T/2)-1,T);
+    Tini = 1;
+    Tend = param.T;
     data.state(nt,:,Tini)= [data.W*rand(2,1); sqrt(data.s2vIni)*randn(2,1)];
     flagTxDone = 0;
     while(~flagTxDone)
@@ -60,23 +60,17 @@ data.obs = Ptx+sqrt(data.s2y)*randn(param.D,param.T);
 
 
 %% Configuration parameters for BCJR, PGAS, EP, FFBS and collapsed Gibbs
-param.bcjr.p1 = 0.95;
-param.bcjr.p2 = 0.05;
-param.pgas.N_PF = 3000;
-param.pgas.N_PG = 10000;
+Nparticles = 3000;     % Number of particles
+param.pgas.N_PF = Nparticles;
+param.pgas.N_PG = Nparticles;
 param.pgas.Niter = 1;
 param.pgas.returnNsamples = 1;
 param.pgas.maxM = 40;
-%param.pgas.particles = zeros(param.pgas.maxM,max(param.pgas.N_PF,param.pgas.N_PG),param.T,'int16');
-param.ep.eps = 5e-7;
-param.ep.beta = 0.2;
-param.ep.Niter = 15;
-param.colGibbs.Niter = 1;
-param.ffbs.Niter = 1;
+
 
 %% Configuration parameters for BNP and inference method
 param.infer.symbolMethod = 'pgas';
-param.infer.sampleNoiseVar = 1;
+param.infer.sampleNoiseVar = 1; % if one the noise variance is inferred
 param.bnp.betaSlice1 = 0.5;
 param.bnp.betaSlice2 = 5;
 param.bnp.maxMnew = 15;
@@ -139,10 +133,29 @@ for it=1:param.Niter
     samples.s2y = sample_post_s2y(data,samples,hyper,param);
 
     %% Evaluation
-%     % Trace of the estimated number of transmitters
+     % Trace of the estimated number of transmitters
      M_EST(it) = sum(sum(samples.Z(:,1,:)~=0,3)>0);
-%     % Trace of the log-likelihood
+     % Trace of the log-likelihood
      LLH(it) = compute_llh(data,samples,hyper,param);
     
 end
+
+%% Show results
+close all;
+colores = 'rgcbmkyrgcbmky';
+figure;
+for nt=1:size(data.state,1)
+    idxNZ = find(squeeze(data.state(nt,1,:))~=0);
+    plot(squeeze(data.state(nt,1,idxNZ))',squeeze(data.state(nt,2,idxNZ))','Color',colores(nt));
+    hold on;
+end
+
+for nt=1:size(samples.Z,1)
+    idxNZ = find(squeeze(samples.Z(nt,1,:))~=0);
+    plot(squeeze(samples.Z(nt,1,idxNZ))',squeeze(samples.Z(nt,2,idxNZ))','Color',colores(param.Nd+nt));
+    hold on;
+end
+plot(data.sensors(:,1),data.sensors(:,2),'bo');
+xlabel('x_1');
+ylabel('x_2');
 
