@@ -1,0 +1,5 @@
+% The file "example.m" contains a simple simulation of the iFDM for the
+% power disaggregation problem. The script load data from the REDD dataset.
+% For description of the
+% variables and structs, see the file "descr.m".
+% 

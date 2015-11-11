@@ -1,10 +1,10 @@
 function [Sest SeqEst nest] = sample_Z_FFBS(data,samples,hyper,param)
 
-auxConstellation = param.constellation;
+auxConstellation = 1:param.Q;
 if(param.flag0)
-    auxConstellation = [0 param.constellation];
+    auxConstellation = [0 1:param.Q];
 end
-Q = length(auxConstellation)^(param.L);
+Q = length(auxConstellation);
 
 Sest = samples.Z;
 

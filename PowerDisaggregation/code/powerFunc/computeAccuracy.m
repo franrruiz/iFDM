@@ -1,11 +1,11 @@
-function [acc cadenas_ord] = calculaAccuracy(cadenas,devices)
+function [acc cadenas_ord] = computeAccuracy(cadenas,devices)
 % Acc = 1 - (sum_t (sum_m |y^true_tm - y^est_tm|))) / 2*(sum_t y^obs_t)
 
 Mest = size(cadenas,1);
 nDev = size(devices,1);
 
 if(Mest==nDev)
-    % Hay Mest! permutaciones
+    % There are Mest! permutacions
     permutac = perms(1:Mest);
     acc = -Inf;
     for i=1:factorial(Mest)
@@ -41,5 +41,5 @@ elseif(Mest>nDev)
         end
     end
 else
-    error(['Mest y nDev no son comparables: Mest=' num2str(Mest) ' y nDev=' num2str(nDev)]);
+    error(['Mest y nDev are not comparable: Mest=' num2str(Mest) ' y nDev=' num2str(nDev)]);
 end

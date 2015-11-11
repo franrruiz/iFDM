@@ -19,7 +19,6 @@
 % -bm: Transition probabilities from active to 0. Size = [Nt x 1]
 % -s2H: Variance of the channel coefficients. Size = [1 x L]
 % -Z: State matrix. Size = [Nt x T]
-%%%%% -seq: Transmitted indexes to symbols in the constellation. Size = [Nt x T]
 % -nest: Number of jumps from 0/1 to 0/1. Size = [2 x 2 x Nt]
 % -slice: Slice variable for the blocked sampling approach.
 % -epAcc: Number of times that the MH algorithm accepts the EP proposal (only used if param.infer.symbolMethod='ep').
