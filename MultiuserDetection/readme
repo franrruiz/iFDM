@@ -2,6 +2,7 @@
 % multiuser blind channel estimation problem. For description of the
 % variables and structs, see the file "descr.m".
 % 
+%
 % IMPORTANT NOTE:
 % Please make sure that you compile using mex the file "pgas_C.cpp" (or
 % "pgas_C_parallel.cpp if you intend to use several cores using
