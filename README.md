@@ -1,4 +1,4 @@
-#INFINITE FACTORIAL DYNAMICAL MODEL#
+#Infinite Factorial Dynamical Model#
 
 Each folder provides code and an example for each of the four applications
 of the infinite factorial dynamical model (iFDM) introduced in 
