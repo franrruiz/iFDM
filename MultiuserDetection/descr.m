@@ -18,9 +18,6 @@
 % samples
 % -H: Channel coefficients. Size = [Nr x Nt x L]
 % -s2y: Noise variance
-% -d0: Reference distance
-% -Ts: Sampling time
-% -pathL: Path loss exponent
 % -am: Transition probabilities from 0 to 0. Size = [Nt x 1]
 % -bm: Transition probabilities from active to 0. Size = [Nt x 1]
 % -s2H: Variance of the channel coefficients. Size = [1 x L]
