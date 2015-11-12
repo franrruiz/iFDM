@@ -50,6 +50,5 @@
 % -tau: Hyperparameter for the noise variance, s2y~InvGamma(nu,tau).
 % -nuX: Hyperparameter for the bX variance, bX~InvGamma(nu,tau).
 % -tauX: Hyperparameter for the X variance, bX~InvGamma(nu,tau).
-
 % 
 
