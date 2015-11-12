@@ -21,7 +21,6 @@
 % -Z: State matrix. Size = [Nt x T]
 % -nest: Number of jumps from 0/1 to 0/1. Size = [2 x 2 x Nt]
 % -slice: Slice variable for the blocked sampling approach.
-% -epAcc: Number of times that the MH algorithm accepts the EP proposal (only used if param.infer.symbolMethod='ep').
 % 
 %% CONFIGURATION PARAMETERS
 % 
@@ -52,12 +51,8 @@
 %   +Niter: Number of iterations to run.
 % -ffbs: Struct with the configuration parameters for FFBS algorithm.
 %   +Niter: Number of iterations to run.
-% -ep: Struct with the configuration parameters for EP algorithm.
-%   +eps: Epsilon coefficient (minimum variance allowed).
-%   +beta: Damping coefficient.
-%   +Niter: Number of iterations for the EP algorithm.
 % -infer: Struct with the options for the inference algorithm.
-%   +symbolMethod: Selects the method to infer the symbols. It can be 'ep', 'pgas', 'ffbs' or 'gibbs'.
+%   +symbolMethod: Selects the method to infer the symbols. It can be 'pgas', 'ffbs' or 'gibbs'.
 %   +sampleNoiseVar: Flag to indicate if the noise variace should be sampled.
 %   +sampleChannel: Flag to indicate if the channel coefficients (and Nt) should be sampled.
 %   +sampleVarH: Flag to indicate if the variance of the channel coefficients should be samples.

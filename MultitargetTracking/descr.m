@@ -18,7 +18,6 @@
 % -Z: State matrix. Size = [Nt x T]
 % -nest: Number of jumps from 0/1 to 0/1. Size = [2 x 2 x Nt]
 % -slice: Slice variable for the blocked sampling approach.
-% -epAcc: Number of times that the MH algorithm accepts the EP proposal (only used if param.infer.symbolMethod='ep').
 % 
 %% CONFIGURATION PARAMETERS
 % 
