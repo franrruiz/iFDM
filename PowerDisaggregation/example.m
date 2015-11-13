@@ -1,7 +1,7 @@
 %% Add code folders to current path
 addpath(genpath('./code'));
 addpath(genpath('./REDD'));
-%addpath(genpath('./AMPs'));
+%addpath(genpath('./AMPds'));
 
 %% Configuration parameters
 H = 1;                              % House from REDD data
@@ -29,10 +29,12 @@ end
 data.obs = X(:,Tini:Tend)/100;
 data.devices = dev(:,Tini:Tend)/100;
 
-% %% Load AMPs data
+% %% Load AMPds data
+% %% NOTE: AMPds is *not* available because the usage of this dataset requires
+% %%       approval by the author. See http://ampds.org
 % idxDevOrder = [3     4     7    10    13    15    17    19];
 % Nd = length(idxDevOrder);
-% load('AMPs/data/AMPds_data.mat','devices');
+% load('AMPds/data/AMPds_data.mat','devices');
 % devices = devices(idxDevOrder(1:Nd),Tini:Tend)/100;
 % data.obs = sum(devices,1);
 % data.devices = devices;
