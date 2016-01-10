@@ -133,6 +133,11 @@ for it=1:param.Niter
      LLH(it) = compute_llh(data,samples,hyper,param);
 end
 
+%% Obtain individual inferred chains in terms of power, not states
+samples.disaggregated = samples.Z;
+samples.Paux = [zeros(1,size(samples.Z,1)); samples.P];
+for m=1:size(samples.Z,1)
+    samples.disaggregated(m,:) = samples.Paux(samples.Z(m,:)+1,m);
+end
 %% Compute Accuracy
-[ACC cad_ord]= computeAccuracy(samples.Z,data.devices);
-
+[ACC cad_ord]= computeAccuracy(samples.disaggregated,data.devices);
