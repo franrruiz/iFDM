@@ -12,7 +12,9 @@ function power_disaggregation(input_file, output_file, config_file)
 %   number of time steps.
 % 
 %  +output_file: Path to the output file. Two variables are saved in the
-%   output file.
+%   output file, detailed below. Warning: These results correspond to the
+%   last iteration of the sampler, they have not been averaged over several
+%   iterations.
 %   -acc: The resulting accuracy.
 %   -output: The inferred disaggregated signals, sorted to match the input.
 % 
