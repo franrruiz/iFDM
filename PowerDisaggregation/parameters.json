@@ -1,0 +1,28 @@
+ {
+     "Q": 4,
+     "Niter": 1000,
+     "verboseCycle": 10,
+     "pgas":
+     {
+         "N_PG": 1000,
+         "Niter": 1,
+         "maxM": 40
+     },
+     "bnp":
+     {
+         "betaSlice1": 0.5,
+         "betaSlice2": 5,
+         "maxMnew": 15,
+         "Mini": 1
+     },
+     "hyper":
+     {
+	 	 "s2y": 0.5,
+         "s2P": 10,
+         "muP": 15,
+         "gamma": 1,
+         "alpha": 1,
+		 "gamma1": 0.1,
+         "gamma2": 2
+      }
+ }
