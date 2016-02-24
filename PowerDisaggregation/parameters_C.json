@@ -7,7 +7,7 @@
          "N_PG": 1000,
          "Niter": 1,
          "maxM": 40,
-         "useMex": 0
+         "useMex": 1
      },
      "bnp":
      {
