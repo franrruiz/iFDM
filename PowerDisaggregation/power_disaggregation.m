@@ -32,6 +32,10 @@ function power_disaggregation(input_file, output_file, config_file)
 %          -maxM: Maximum number of parallel chains allowed before resizing
 %                 matrices. A high value is recommended for memory
 %                 efficiency reasons (default=40).
+%          -useMex: Use mex file? If true, the C++ file named
+%                   code/pgas/pgas_C_parallel.cpp must be previously
+%                   compiled using mex (default=0)
+%                   NOTE: This requires GSL and OMP libraries.
 %   -bnp: Struct to configure the BNP-specific part of the algorithm. It may
 %         contain the following fields:
 %         -betaSlice1: See below (default=0.5).
@@ -103,7 +107,10 @@ end
 if ~isfield(param.pgas,'maxM')
     param.pgas.maxM = 40;
 end
-param.pgas.N_PF = 3000;
+if ~isfield(param.pgas,'useMex')
+    param.pgas.useMex = 0;
+end
+param.pgas.N_PF = param.pgas.N_PG;
 param.pgas.returnNsamples = 1;
 param.pgas.particles = zeros(param.pgas.maxM,max(param.pgas.N_PF,param.pgas.N_PG),param.T,'int16');
 
@@ -156,6 +163,7 @@ end
 
 %% Initialization
 init.P = param.hyper.muP+sqrt(param.hyper.s2P)*randn(param.Q,param.bnp.Mini);
+init.ptrans = zeros(param.Q+1,param.Q,param.bnp.Mini);
 for mm=1:param.bnp.Mini
     init.ptrans(:,:,mm) = dirichletrnd(param.hyper.gamma*ones(1,param.Q), param.Q+1);
 end
@@ -176,7 +184,8 @@ fprintf(1,['Initializing inference...' char(13)]);
 for it=1:param.Niter
     %% Print progress
     if(mod(it,param.verboseCycle)==0)
-        fprintf(1,['Iteration ' num2str(it) ' out of ' num2str(param.Niter) ' completed' char(13)]);
+        fprintf(1,['Iteration ' num2str(it) '/' num2str(param.Niter) '...' char(13)]);
+        drawnow;
     end
     
     %% Algorithm
